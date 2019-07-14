@@ -24,5 +24,26 @@ namespace TestTaskInfocom
         {
             InitializeComponent();
         }
+
+        private void MenuItemEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Оборудование");
+        }
+
+        private void MenuItemTypesEquipment_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Типы оборудования");
+        }
+
+        private void MenuItemRooms_Click(object sender, RoutedEventArgs e)
+        {
+            var winRooms = new winRooms();
+            winRooms.ShowDialog();
+        }
+
+        private void MenuItemReport_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Отчет");
+        }
     }
 }

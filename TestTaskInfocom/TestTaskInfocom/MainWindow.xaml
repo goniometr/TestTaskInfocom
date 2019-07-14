@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskInfocom"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Учет оборудования" Height="Auto" Width="Auto" Background="LightCyan">
     <Grid>
-        
+        <!--Menu-->
+        <Menu x:Name="menu" HorizontalAlignment="Left"  VerticalAlignment="Top">
+            <MenuItem Header="Оборудование" Click="MenuItemEquipment_Click" Name="Equipment"></MenuItem>
+            <MenuItem Name="Directories" Header="Справочники">
+                <MenuItem Name="TypesEquipment" Header="Типы оборудования" Click="MenuItemTypesEquipment_Click"></MenuItem>
+                <MenuItem Name="Rooms" Header="Кабинеты" Click="MenuItemRooms_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Name="Reports" Header="Отчеты" Click="MenuItemReport_Click"></MenuItem>
+        </Menu>
     </Grid>
 </Window>
