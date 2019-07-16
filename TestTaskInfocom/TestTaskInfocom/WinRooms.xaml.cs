@@ -21,8 +21,7 @@ namespace TestTaskInfocom
     public partial class winRooms : Window
     {
         TestTaskInfocomEntities context = new TestTaskInfocomEntities();
-         CollectionViewSource roomViewSource;
-        //CollectionViewSource ordViewSource;
+        CollectionViewSource roomViewSource;
         public winRooms()
         {
             InitializeComponent();
@@ -32,20 +31,27 @@ namespace TestTaskInfocom
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            context.Room.Load();            
+            context.Room.Load();
             roomViewSource.Source = context.Room.Local;
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            var fmRoom = new WinRoomEditor((Room)grRooms.SelectedItem);
+            var room = (Room)grRooms.SelectedItem;
+            var fmRoom = new WinRoomEditor(room);
             fmRoom.ShowDialog();
-            roomViewSource.Source = context.Room.Local;
+            if (fmRoom.DialogResult == true)
+            {
+                var entity = context.Room.Find(room.Id);
+                if (entity == null) return;
+                entity.Floor = room.Floor;
+                entity.Name = room.Name;
+                entity.Description = room.Description;
+                context.SaveChanges();
+                context.Room.Load();
+                roomViewSource.Source = context.Room.ToList();
+            }
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
@@ -55,5 +61,18 @@ namespace TestTaskInfocom
             context.SaveChanges();
             roomViewSource.Source = context.Room.Local;
         }
+
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            var fmRoom = new WinRoomEditor(context);
+            fmRoom.ShowDialog();
+            if (fmRoom.DialogResult == true)
+            {               
+                context.Room.Load();
+                roomViewSource.Source = context.Room.ToList();
+            }
+        }
+
     }
 }

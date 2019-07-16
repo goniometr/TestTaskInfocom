@@ -20,47 +20,82 @@ namespace TestTaskInfocom
     public partial class WinRoomEditor : Window
     {
         Room room;
+        bool edit;
+        TestTaskInfocomEntities context;
 
         public WinRoomEditor()
         {
             InitializeComponent();
-            //var d = Properties.Resources.add;
         }
 
+        //Конструктор вызывается при редактировании Кабинета
         public WinRoomEditor(Room _room)
         {
+            edit = true;
             room = _room;
             InitializeComponent();
-
-            
-            //var d = Properties.Resources.add;
         }
 
+        //Вызывается при добавлении кабинета
+        public WinRoomEditor(TestTaskInfocomEntities _context)
+        {
+            edit = false;
+            context = _context;
+            InitializeComponent();
+        }
 
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            descriptionTextBox.Text = room.Description;
-            floorTextBox.Text = room.Name;
-            nameTextBox.Text = room.Name;
-
-
-
-
-            //System.Windows.Data.CollectionViewSource roomViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("roomViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // roomViewSource.Source = [generic data source]
+            if (edit)
+            {
+                descriptionTextBox.Text = room.Description;
+                floorTextBox.Text = room.Name;
+                nameTextBox.Text = room.Name;
+            }
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+
+        private void EditData()
         {
-
-
-            //var fmRoom = new WinRoomEditor((Room)grRooms.SelectedItem);
-            //fmRoom.ShowDialog();
-            //roomViewSource.Source = context.Room.Local;
+            room.Description = descriptionTextBox.Text;
+            room.Name = nameTextBox.Text;
+            var floor = 0;
+            var res = int.TryParse(floorTextBox.Text, out floor);
+            if (res)
+            {
+                room.Floor = floor;
+                this.DialogResult = true;
+                this.Close();
+            }
+            else MessageBox.Show("Этаж указан не корректно!");
         }
 
+        private void CreateData()
+        {
+            room = context.Room.Create();
+            room.Description = descriptionTextBox.Text;
+            room.Name = nameTextBox.Text;
+            var floor = 0;
+            var res = int.TryParse(floorTextBox.Text, out floor);
+            if (res)
+            {
+                room.Floor = floor;
+                context.Room.Add(room);
+                context.SaveChanges();
+                this.DialogResult = true;
+                this.Close();
+            }
+            else MessageBox.Show("Этаж указан не корректно!");
+        }
+
+
+        //Кнопка сохранить
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (edit) EditData();
+            else CreateData();
+        }
     }
 }
