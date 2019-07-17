@@ -32,7 +32,8 @@ namespace TestTaskInfocom
 
         private void MenuItemTypesEquipment_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Типы оборудования");
+            var winEquipmentType = new WinEquipmentTypes();
+            winEquipmentType.ShowDialog();
         }
 
         private void MenuItemRooms_Click(object sender, RoutedEventArgs e)

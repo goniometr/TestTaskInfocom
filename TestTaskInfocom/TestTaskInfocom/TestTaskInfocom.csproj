@@ -71,6 +71,12 @@
     <Compile Include="EquipmentType.cs">
       <DependentUpon>TaskModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="WinEquipmentTypeEditor.xaml.cs">
+      <DependentUpon>WinEquipmentTypeEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinEquipmentTypes.xaml.cs">
+      <DependentUpon>WinEquipmentTypes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="File.cs">
       <DependentUpon>TaskModel.tt</DependentUpon>
     </Compile>
@@ -98,6 +104,14 @@
     <Compile Include="WinRooms.xaml.cs">
       <DependentUpon>WinRooms.xaml</DependentUpon>
     </Compile>
+    <Page Include="WinEquipmentTypeEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinEquipmentTypes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -138,6 +152,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\EquipmentType.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
