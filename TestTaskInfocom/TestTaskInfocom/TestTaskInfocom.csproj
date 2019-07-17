@@ -151,6 +151,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="DB\db.bak" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\EquipmentType.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
@@ -190,5 +191,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
