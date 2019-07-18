@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskInfocom"
         mc:Ignorable="d"
-        Title="Учет оборудования" Height="Auto" Width="Auto" Background="LightCyan">
-    <Grid>
+        Title="Учет оборудования" Height="Auto" Width="Auto" Background="LightCyan" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="equipmentTypeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:EquipmentType}, CreateList=True}"/>
+        <CollectionViewSource x:Key="equipmentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Equipment}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource equipmentTypeViewSource}">
         <!--Menu-->
         <Menu x:Name="menu" HorizontalAlignment="Left"  VerticalAlignment="Top">
             <MenuItem Header="Оборудование" Click="MenuItemEquipment_Click" Name="Equipment"></MenuItem>
@@ -16,5 +20,12 @@
             </MenuItem>
             <MenuItem Name="Reports" Header="Отчеты" Click="MenuItemReport_Click"></MenuItem>
         </Menu>
+        <ComboBox x:Name="equipmentTypeComboBox" DisplayMemberPath="Description" ItemsSource="{Binding}" Margin="308,146,434,340" SelectedValuePath="Description">
+            <ComboBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel/>
+                </ItemsPanelTemplate>
+            </ComboBox.ItemsPanel>
+        </ComboBox>
     </Grid>
 </Window>

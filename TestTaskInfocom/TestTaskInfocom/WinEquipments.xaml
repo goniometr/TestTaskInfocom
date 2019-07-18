@@ -1,0 +1,51 @@
+﻿<Window x:Class="TestTaskInfocom.WinEquipments"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestTaskInfocom"
+        mc:Ignorable="d"
+        Title="Список оборудования" Height="Auto" Width="Auto" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="equipmentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Equipment}, CreateList=True}"/>
+        <CollectionViewSource x:Key="fileViewSource" d:DesignSource="{d:DesignInstance {x:Type local:File}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource equipmentViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="191"></RowDefinition>
+            <RowDefinition Height="309"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel >
+            <Button Click="Add_Click" ToolTip="Добавить">
+                <Image Source = "Images\add.png"></Image>
+            </Button>
+            <Button Click="Edit_Click" ToolTip="Редактировать">
+                <Image Source = "Images\edit.png"></Image>
+            </Button>
+            <Button Click="Remove_Click" ToolTip="Удалить">
+                <Image Source = "Images\remove.png"></Image>
+            </Button>
+        </WrapPanel>
+        <DataGrid x:Name="grEquipment" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="Auto" Height="Auto" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="inventoryNumberColumn" Binding="{Binding InventoryNumber}" Header="Инвентарный номер" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Оборудование" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="equipmentTypeIdColumn" Binding="{Binding EquipmentTypeId}" Header="Тип оборудования" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="roomIdColumn" Binding="{Binding RoomId}" Header="Кабинет" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding Description}" Header="Примечания" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="fileDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource fileViewSource}}" Grid.Row="2" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn1" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" Visibility ="Hidden"/>
+                <DataGridTextColumn x:Name="nameColumn1" Binding="{Binding Name}" Header="Имя файла" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="descriptionColumn1" Binding="{Binding Description}" Header="Примечания" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="equipmentIdColumn" Visibility="Hidden" Binding="{Binding EquipmentId}" Header="Equipment Id" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+
+
+</Window>

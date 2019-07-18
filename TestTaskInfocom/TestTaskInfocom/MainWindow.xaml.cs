@@ -27,7 +27,8 @@ namespace TestTaskInfocom
 
         private void MenuItemEquipment_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Оборудование");
+            var winEquipments = new WinEquipments();
+            winEquipments.ShowDialog();
         }
 
         private void MenuItemTypesEquipment_Click(object sender, RoutedEventArgs e)
@@ -44,7 +45,19 @@ namespace TestTaskInfocom
 
         private void MenuItemReport_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Отчет");
+            var f = new Window1();
+            f.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Data.CollectionViewSource equipmentTypeViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipmentTypeViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // equipmentTypeViewSource.Source = [generic data source]
+            System.Windows.Data.CollectionViewSource equipmentViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipmentViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // equipmentViewSource.Source = [generic data source]
         }
     }
 }
