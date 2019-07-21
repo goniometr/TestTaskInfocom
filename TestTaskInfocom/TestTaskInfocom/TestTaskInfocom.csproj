@@ -72,9 +72,6 @@
     <Compile Include="EquipmentType.cs">
       <DependentUpon>TaskModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WinEquipments.xaml.cs">
       <DependentUpon>WinEquipments.xaml</DependentUpon>
     </Compile>
@@ -114,10 +111,6 @@
     <Compile Include="WinRooms.xaml.cs">
       <DependentUpon>WinRooms.xaml</DependentUpon>
     </Compile>
-    <Page Include="Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="WinEquipments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

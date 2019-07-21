@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,17 +15,16 @@ using System.Windows.Shapes;
 
 namespace TestTaskInfocom
 {
-    
-
     /// <summary>
     /// Interaction logic for WinEquipmetEditor.xaml
     /// </summary>
     public partial class WinEquipmentEditor : Window
     {
-        Equipment  equipment;
+        Equipment equipment;
         bool edit;
         TestTaskInfocomEntities context;
         List<EquipmentType> equipmentType = new List<EquipmentType>();
+        List<ValueImage> listImage = new List<ValueImage>();
 
         public WinEquipmentEditor()
         {
@@ -39,13 +39,13 @@ namespace TestTaskInfocom
             context = _context;
             InitializeComponent();
             LoadData();
-            
+
         }
 
         public void LoadData()
         {
             //load equipmentType
-            cbxEquipmentType.ItemsSource =   context.EquipmentType.ToList();
+            cbxEquipmentType.ItemsSource = context.EquipmentType.ToList();
             cbxEquipmentType.SelectedItem = equipment?.EquipmentType;
 
             //locad rooms
@@ -65,10 +65,10 @@ namespace TestTaskInfocom
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
-        {          
+        {
             System.Windows.Data.CollectionViewSource equipmentViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipmentViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
             equipmentViewSource.Source = new List<Equipment>() { equipment };
+            System.Windows.Data.CollectionViewSource fileViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("fileViewSource")));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -79,7 +79,7 @@ namespace TestTaskInfocom
 
         private void EditData()
         {
-            equipment.InventoryNumber = inventoryNumberTextBox.Text;            
+            equipment.InventoryNumber = inventoryNumberTextBox.Text;
             equipment.Description = descriptionTextBox.Text;
             equipment.Name = nameTextBox.Text;
             equipment.Room = (Room)cbxRoom.SelectedItem;
@@ -88,22 +88,29 @@ namespace TestTaskInfocom
             this.Close();
         }
 
+
+        private void CreateEquipment()
+        {
+            equipment = context.Equipment.Create();
+            equipment.Description = descriptionTextBox.Text;
+            equipment.InventoryNumber = inventoryNumberTextBox.Text;
+            equipment.Name = nameTextBox.Text;
+            equipment.Room = (Room)cbxRoom.SelectedItem;
+            equipment.EquipmentType = (EquipmentType)cbxEquipmentType.SelectedItem;
+        }
+
+
         private void CreateData()
         {
             try
             {
-                equipment = context.Equipment.Create();
-                equipment.Description = descriptionTextBox.Text;
-                equipment.InventoryNumber = inventoryNumberTextBox.Text;
-                equipment.Name = nameTextBox.Text;
-                equipment.Room = (Room)cbxRoom.SelectedItem;
-                equipment.EquipmentType = (EquipmentType)cbxEquipmentType.SelectedItem;
+                CreateEquipment();
                 context.Equipment.Add(equipment);
                 context.SaveChanges();
                 this.DialogResult = true;
                 this.Close();
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            catch (System.Data.Entity.Validation.DbEntityValidationException)
             {
                 MessageBox.Show("Ошибка валидации данных");
             }
@@ -113,5 +120,30 @@ namespace TestTaskInfocom
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Button_Click_AddFile(object sender, RoutedEventArgs e)
+        {
+            var ofd = new Microsoft.Win32.OpenFileDialog() { Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif" };
+            var result = ofd.ShowDialog();
+            if (result == false) return;
+            if (equipment == null) CreateEquipment();
+            Byte[] bytes = System.IO.File.ReadAllBytes(ofd.FileName);
+            var file = context.File.Create();
+
+            file.Base64 = bytes;
+            file.Equipment = equipment;
+            file.Name = System.IO.Path.GetFileName(ofd.FileName);
+
+            context.File.Add(file);
+            context.SaveChanges();
+            MessageBox.Show("Файл успешно добавлен");
+        }
+
+    }
+
+    public class ValueImage
+    {
+        public string photo { get; set; }
+        public string name { get; set; }
     }
 }

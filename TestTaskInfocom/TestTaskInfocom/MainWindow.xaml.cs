@@ -43,12 +43,6 @@ namespace TestTaskInfocom
             winRooms.ShowDialog();
         }
 
-        private void MenuItemReport_Click(object sender, RoutedEventArgs e)
-        {
-            var f = new Window1();
-            f.Show();
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 

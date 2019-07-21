@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskInfocom"
         mc:Ignorable="d" ResizeMode="NoResize"
-        Title="Оборудование" Height="350" Width="550" Loaded="Window_Loaded">
+        Title="Оборудование" Height="5000" Width="550" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="equipmentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Equipment}, CreateList=True}"/>
+        <CollectionViewSource x:Key="fileViewSource" d:DesignSource="{d:DesignInstance {x:Type local:File}, CreateList=True}"/>
     </Window.Resources>
-    <Grid>
+    <Grid DataContext="{StaticResource fileViewSource}">
         <Grid x:Name="grid1" DataContext="{StaticResource equipmentViewSource}" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -122,6 +123,11 @@
                      Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                      VerticalAlignment="Center" 
                      Width="294"/>
+            <StackPanel Name="Buttons" Grid.Row="6" Grid.Column="0">
+                <Button Click="Button_Click_AddFile"  ToolTip="Добавить" Width="100" Height="50" HorizontalAlignment="Left">
+                    <Image Source = "Images\add.png"></Image>
+                </Button>
+            </StackPanel>
             <Button x:Name="button" 
                 Content="Сохранить" 
                 Click="Button_Click" 

@@ -22,31 +22,20 @@ namespace TestTaskInfocom
     {
         TestTaskInfocomEntities context = new TestTaskInfocomEntities();
         private CollectionViewSource equipmentViewSource;
-        List<EquipmentType> listEquipmentType;
+
 
         public WinEquipments()
-        {         
+        {
             InitializeComponent();
             equipmentViewSource = ((CollectionViewSource)(FindResource("equipmentViewSource")));
-           // cbxequipmentType.ItemsSource = context.EquipmentType.ToList();
             DataContext = this;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
             context.Equipment.Load();
-
             equipmentViewSource.Source = context.Equipment.Local;
-            //equipmentViewSource.Source = context.Equipment.Local;
-
-
-            //System.Windows.Data.CollectionViewSource equipmentViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("equipmentViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            ///equipmentViewSource.Source = equipmentViewSource;
             System.Windows.Data.CollectionViewSource fileViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("fileViewSource")));
-            // Load data by setting the CollectionViewSource.Source property:
-            // fileViewSource.Source = [generic data source]
         }
 
 
@@ -59,13 +48,14 @@ namespace TestTaskInfocom
             {
                 var entity = context.Equipment.Find(equipment.Id);
                 if (entity == null) return;
-                //entity.Floor = room.Floor;
                 entity.Name = equipment.Name;
                 entity.Description = equipment.Description;
                 context.SaveChanges();
                 context.Room.Load();
                 equipmentViewSource.Source = context.Equipment.ToList();
+                LoadPictures();
             }
+
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
@@ -88,5 +78,27 @@ namespace TestTaskInfocom
             }
         }
 
+
+        private void GrEquipment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadPictures();
+        }
+
+        private void LoadPictures()
+        {
+            var row = grEquipment.SelectedItem;
+            if (row == null) return;
+            if (!(grEquipment.SelectedItem is Equipment)) return;
+            var equipment = (Equipment)grEquipment.SelectedItem;
+            if (equipment == null) return;
+            foreach (var item in equipment.File)
+            {
+                if (!System.IO.File.Exists(item.Name))
+                    System.IO.File.WriteAllBytes(item.Name, item.Base64);
+            }
+            var list = equipment.File.Select(x => new ValueImage() { photo = System.IO.Directory.GetCurrentDirectory() + "\\" + x.Name, name = x.Name }).ToList();
+
+            listFiles.ItemsSource = list;
+        }
     }
 }

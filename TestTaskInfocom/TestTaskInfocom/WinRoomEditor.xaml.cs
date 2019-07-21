@@ -51,7 +51,7 @@ namespace TestTaskInfocom
             if (edit)
             {
                 descriptionTextBox.Text = room.Description;
-                floorTextBox.Text = room.Name;
+                floorTextBox.Text = room.Floor.ToString();
                 nameTextBox.Text = room.Name;
             }
         }

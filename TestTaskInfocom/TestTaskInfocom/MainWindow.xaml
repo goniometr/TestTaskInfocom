@@ -18,7 +18,6 @@
                 <MenuItem Name="TypesEquipment" Header="Типы оборудования" Click="MenuItemTypesEquipment_Click"></MenuItem>
                 <MenuItem Name="Rooms" Header="Кабинеты" Click="MenuItemRooms_Click"></MenuItem>
             </MenuItem>
-            <MenuItem Name="Reports" Header="Отчеты" Click="MenuItemReport_Click"></MenuItem>
         </Menu>
     </Grid>
 </Window>

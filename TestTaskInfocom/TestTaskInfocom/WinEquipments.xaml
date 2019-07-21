@@ -10,7 +10,7 @@
         <CollectionViewSource x:Key="equipmentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Equipment}, CreateList=True}"/>
         <CollectionViewSource x:Key="fileViewSource" d:DesignSource="{d:DesignInstance {x:Type local:File}, CreateList=True}"/>
     </Window.Resources>
-    <Grid DataContext="{StaticResource equipmentViewSource}">
+    <Grid DataContext="{StaticResource equipmentViewSource}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="191"></RowDefinition>
@@ -27,26 +27,31 @@
                 <Image Source = "Images\remove.png"></Image>
             </Button>
         </WrapPanel>
-        <DataGrid x:Name="grEquipment" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="Auto" Height="Auto" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="grEquipment" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="Auto" Height="Auto" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="GrEquipment_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" Visibility="Hidden"/>
                 <DataGridTextColumn x:Name="inventoryNumberColumn" Binding="{Binding InventoryNumber}" Header="Инвентарный номер" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Оборудование" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="equipmentTypeIdColumn" Binding="{Binding EquipmentTypeId}" Header="Тип оборудования" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="roomIdColumn" Binding="{Binding RoomId}" Header="Кабинет" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="equipmentTypeIdColumn" Binding="{Binding EquipmentType.Name}" Header="Тип оборудования" Width="SizeToHeader" SortMemberPath="EquipmentTypeId"/>
+                <DataGridTextColumn x:Name="roomIdColumn" Binding="{Binding Room.Name}" Header="Кабинет" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding Description}" Header="Примечания" Width="SizeToHeader"/>
-                <!--<DataGridComboBoxColumn x:Name="cbxequipmentType" Binding.SourceUpdated ="{Binding Name}" Header="Оборудовани"/>-->
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="fileDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource fileViewSource}}" Grid.Row="2" RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="idColumn1" Binding="{Binding Id}" Header="Id" Width="SizeToHeader" Visibility ="Hidden"/>
-                <DataGridTextColumn x:Name="nameColumn1" Binding="{Binding Name}" Header="Имя файла" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="descriptionColumn1" Binding="{Binding Description}" Header="Примечания" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="equipmentIdColumn" Visibility="Hidden" Binding="{Binding EquipmentId}" Header="Equipment Id" Width="SizeToHeader"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView x:Name="listFiles" Margin="10" Grid.Row="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Фото" Width="70">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Image Width="70" Source="{Binding photo}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Имя файла" Width="100" DisplayMemberBinding="{Binding name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
-
-
 </Window>
