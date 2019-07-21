@@ -4,17 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskInfocom"
-        mc:Ignorable="d"
-        Title="Оборудование" Height="450" Width="800" Loaded="Window_Loaded">
+        mc:Ignorable="d" ResizeMode="NoResize"
+        Title="Оборудование" Height="350" Width="550" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="equipmentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Equipment}, CreateList=True}"/>
     </Window.Resources>
     <Grid>
-        <Button x:Name="button" Content="Сохранить" Click="Button_Click" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
-        <Grid x:Name="grid1" DataContext="{StaticResource equipmentViewSource}" HorizontalAlignment="Left" Margin="268,52,0,0" VerticalAlignment="Top">
+        <Grid x:Name="grid1" DataContext="{StaticResource equipmentViewSource}" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -23,47 +22,113 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Description:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="descriptionTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Equipment Type:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <ComboBox x:Name="equipmentTypeComboBox" Grid.Column="1" DisplayMemberPath="EquipmentType" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="1" VerticalAlignment="Center" Width="120">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
+
+            <Label Content="Id:" 
+                   Visibility="Hidden" 
+                   Grid.Column="0"
+                   HorizontalAlignment="Left" 
+                   Margin="3" 
+                   Grid.Row="0" 
+                   VerticalAlignment="Center"/>
+            <TextBox x:Name="idTextBox" 
+                     Visibility="Hidden" 
+                     Grid.Column="1" 
+                     HorizontalAlignment="Left" 
+                     Height="23" 
+                     Margin="3" 
+                     Grid.Row="0" 
+                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                     VerticalAlignment="Center" 
+                     Width="120"/>
+            <!--inventory Number-->
+            <Label Content="Инвентарный номер:"
+                   Grid.Column="0" 
+                   HorizontalAlignment="Left" 
+                   Margin="3" Grid.Row="1" 
+                   VerticalAlignment="Center"/>
+            <TextBox x:Name="inventoryNumberTextBox" 
+                     Grid.Column="1" 
+                     HorizontalAlignment="Left" 
+                     Height="24" 
+                     Margin="3,4,0,4" 
+                     Grid.Row="1" 
+                     Text="{Binding InventoryNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                     VerticalAlignment="Center" 
+                     Width="294"/>
+            <!--Equipment-->
+            <Label Content="Оборудование" 
+                   Grid.Column="0"
+                   HorizontalAlignment="Left" 
+                   Margin="3" 
+                   Grid.Row="2" 
+                   VerticalAlignment="Center"/>
+            <TextBox x:Name="nameTextBox" 
+                     Grid.Column="1" 
+                     HorizontalAlignment="Left" 
+                     Height="24"
+                     Margin="3,4,0,4"
+                     Grid.Row="2" 
+                     Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                     VerticalAlignment="Center" 
+                     Width="294"/>
+            <!--Equipment Type-->
+            <Label Content="Тип оборудования:" 
+                   Grid.Column="0" 
+                   HorizontalAlignment="Left" 
+                   Margin="3" 
+                   Grid.Row="3" 
+                   VerticalAlignment="Center"/>
+            <ComboBox Name="cbxEquipmentType" Grid.Row="3" Grid.Column="1" Height="23" Margin="3">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
-            <Label Content="Equipment Type Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <TextBox x:Name="equipmentTypeIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding EquipmentTypeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
-            <TextBox x:Name="idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Inventory Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <TextBox x:Name="inventoryNumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="4" Text="{Binding InventoryNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="5" VerticalAlignment="Center"/>
-            <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="5" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Room:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="6" VerticalAlignment="Center"/>
-            <ComboBox x:Name="roomComboBox" 
-                      Grid.Column="1" 
-                      DisplayMemberPath="Room" 
-                      HorizontalAlignment="Left" 
-                      Height="Auto" 
-                      ItemsSource="{Binding}" 
-                      Margin="3" 
-                      Grid.Row="6" 
-                      VerticalAlignment="Center"
-                      Width="120"
-                      SelectedValuePath="Id">
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel/>
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
+            <!--Room-->
+            <Label Content="Кабинет:" 
+                   Grid.Column="0" 
+                   HorizontalAlignment="Left" 
+                   Margin="3" 
+                   Grid.Row="4" 
+                   VerticalAlignment="Center"/>
+            <ComboBox Name="cbxRoom" Grid.Row="4" Grid.Column="1" Height="23" Margin="3">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
-            <Label Content="Room Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="7" VerticalAlignment="Center"/>
-            <TextBox x:Name="roomIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="7" Text="{Binding RoomId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            <!--Description-->
+            <Label Content="Примечания:" 
+                   Grid.Column="0" 
+                   HorizontalAlignment="Left" 
+                   Margin="3"
+                   Grid.Row="5" 
+                   VerticalAlignment="Center"/>
+            <TextBox x:Name="descriptionTextBox" 
+                     Grid.Column="1" 
+                     HorizontalAlignment="Left" 
+                     Height="24" 
+                     Margin="3,4,0,4" 
+                     Grid.Row="5" 
+                     Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                     VerticalAlignment="Center" 
+                     Width="294"/>
+            <Button x:Name="button" 
+                Content="Сохранить" 
+                Click="Button_Click" 
+                Grid.Column="1" 
+                Grid.Row="7" 
+                HorizontalAlignment="Right"                 
+                Width="75"/>
         </Grid>
     </Grid>
 </Window>

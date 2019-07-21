@@ -20,12 +20,5 @@
             </MenuItem>
             <MenuItem Name="Reports" Header="Отчеты" Click="MenuItemReport_Click"></MenuItem>
         </Menu>
-        <ComboBox x:Name="equipmentTypeComboBox" DisplayMemberPath="Description" ItemsSource="{Binding}" Margin="308,146,434,340" SelectedValuePath="Description">
-            <ComboBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel/>
-                </ItemsPanelTemplate>
-            </ComboBox.ItemsPanel>
-        </ComboBox>
     </Grid>
 </Window>

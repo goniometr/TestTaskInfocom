@@ -35,6 +35,7 @@
                 <DataGridTextColumn x:Name="equipmentTypeIdColumn" Binding="{Binding EquipmentTypeId}" Header="Тип оборудования" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="roomIdColumn" Binding="{Binding RoomId}" Header="Кабинет" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="descriptionColumn" Binding="{Binding Description}" Header="Примечания" Width="SizeToHeader"/>
+                <!--<DataGridComboBoxColumn x:Name="cbxequipmentType" Binding.SourceUpdated ="{Binding Name}" Header="Оборудовани"/>-->
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="fileDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource fileViewSource}}" Grid.Row="2" RowDetailsVisibilityMode="VisibleWhenSelected">

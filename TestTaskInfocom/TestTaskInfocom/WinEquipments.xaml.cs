@@ -22,11 +22,13 @@ namespace TestTaskInfocom
     {
         TestTaskInfocomEntities context = new TestTaskInfocomEntities();
         private CollectionViewSource equipmentViewSource;
+        List<EquipmentType> listEquipmentType;
 
         public WinEquipments()
         {         
             InitializeComponent();
             equipmentViewSource = ((CollectionViewSource)(FindResource("equipmentViewSource")));
+           // cbxequipmentType.ItemsSource = context.EquipmentType.ToList();
             DataContext = this;
         }
 
@@ -51,7 +53,7 @@ namespace TestTaskInfocom
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             var equipment = (Equipment)grEquipment.SelectedItem;
-            var fmEquipment = new WinEquipmentEditor(equipment);
+            var fmEquipment = new WinEquipmentEditor(equipment, context);
             fmEquipment.ShowDialog();
             if (fmEquipment.DialogResult == true)
             {
@@ -68,10 +70,10 @@ namespace TestTaskInfocom
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
-            //var room = (Room)grRooms.SelectedItem;
-            //context.Room.Remove(room);
-            //context.SaveChanges();
-            //roomViewSource.Source = context.Room.Local;
+            var equipment = (Equipment)grEquipment.SelectedItem;
+            context.Equipment.Remove(equipment);
+            context.SaveChanges();
+            equipmentViewSource.Source = context.Equipment.Local;
         }
 
 
