@@ -72,15 +72,6 @@
     <Compile Include="EquipmentType.cs">
       <DependentUpon>TaskModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="WinEquipments.xaml.cs">
-      <DependentUpon>WinEquipments.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WinEquipmentTypeEditor.xaml.cs">
-      <DependentUpon>WinEquipmentTypeEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WinEquipmentTypes.xaml.cs">
-      <DependentUpon>WinEquipmentTypes.xaml</DependentUpon>
-    </Compile>
     <Compile Include="File.cs">
       <DependentUpon>TaskModel.tt</DependentUpon>
     </Compile>
@@ -101,6 +92,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TaskModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="WinEquipments.xaml.cs">
+      <DependentUpon>WinEquipments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinEquipmentTypeEditor.xaml.cs">
+      <DependentUpon>WinEquipmentTypeEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinEquipmentTypes.xaml.cs">
+      <DependentUpon>WinEquipmentTypes.xaml</DependentUpon>
     </Compile>
     <Compile Include="WinEquipmentEditor.xaml.cs">
       <DependentUpon>WinEquipmentEditor.xaml</DependentUpon>
@@ -194,6 +194,11 @@
     <Resource Include="Images\add.png" />
     <Resource Include="Images\edit.png" />
     <Resource Include="Images\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="TaskModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TaskModel.edmx</DependentUpon>
@@ -205,9 +210,5 @@
       <LastGenOutput>TaskModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

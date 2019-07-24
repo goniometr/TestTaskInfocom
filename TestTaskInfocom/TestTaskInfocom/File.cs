@@ -10,13 +10,13 @@
 namespace TestTaskInfocom
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class File
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public long EquipmentId { get; set; }
+        public Nullable<long> EquipmentId { get; set; }
         public string Description { get; set; }
         public byte[] Base64 { get; set; }
     

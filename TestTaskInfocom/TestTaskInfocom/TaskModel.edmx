@@ -29,8 +29,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="EquipmentId" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="EquipmentId" Type="bigint" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Base64" Type="varbinary(max)" Nullable="false" />
         </EntityType>
@@ -68,7 +68,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_File_Equipment">
-          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="File" Type="Self.File" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Equipment">
@@ -130,8 +132,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="EquipmentId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EquipmentId" Type="Int64" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Base64" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <NavigationProperty Name="Equipment" Relationship="Self.FK_File_Equipment" FromRole="File" ToRole="Equipment" />
@@ -171,7 +173,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_File_Equipment">
-          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="File" Type="Self.File" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Equipment">
@@ -182,7 +186,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TestTaskInfocomEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TestTaskEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Equipment" EntityType="Self.Equipment" />
           <EntitySet Name="EquipmentType" EntityType="Self.EquipmentType" />
           <EntitySet Name="File" EntityType="Self.File" />
@@ -205,7 +209,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TestTaskInfocomModelStoreContainer" CdmEntityContainer="TestTaskInfocomEntities">
+        <EntityContainerMapping StorageEntityContainer="TestTaskInfocomModelStoreContainer" CdmEntityContainer="TestTaskEntities">
           <EntitySetMapping Name="Equipment">
             <EntityTypeMapping TypeName="TestTaskInfocomModel.Equipment">
               <MappingFragment StoreEntitySet="Equipment">

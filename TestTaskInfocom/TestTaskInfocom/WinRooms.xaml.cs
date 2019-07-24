@@ -20,7 +20,9 @@ namespace TestTaskInfocom
     /// </summary>
     public partial class winRooms : Window
     {
-        TestTaskInfocomEntities context = new TestTaskInfocomEntities();
+
+        
+        TestTaskEntities context = new TestTaskEntities();
         CollectionViewSource roomViewSource;
         public winRooms()
         {

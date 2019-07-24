@@ -21,7 +21,7 @@ namespace TestTaskInfocom
     {
         Room room;
         bool edit;
-        TestTaskInfocomEntities context;
+        TestTaskEntities context;
 
         public WinRoomEditor()
         {
@@ -37,7 +37,7 @@ namespace TestTaskInfocom
         }
 
         //Вызывается при добавлении кабинета
-        public WinRoomEditor(TestTaskInfocomEntities _context)
+        public WinRoomEditor(TestTaskEntities _context)
         {
             edit = false;
             context = _context;

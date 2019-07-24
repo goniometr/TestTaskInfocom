@@ -20,7 +20,7 @@ namespace TestTaskInfocom
     /// </summary>
     public partial class WinEquipmentTypes : Window
     {
-        TestTaskInfocomEntities context = new TestTaskInfocomEntities();
+        TestTaskEntities context = new TestTaskEntities();
         CollectionViewSource equipmentTypeViewSource;
 
         public WinEquipmentTypes()

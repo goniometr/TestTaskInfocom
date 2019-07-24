@@ -10,14 +10,14 @@
 namespace TestTaskInfocom
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class EquipmentType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EquipmentType()
         {
-            this.Equipment = new ObservableCollection<Equipment>();
+            this.Equipment = new HashSet<Equipment>();
         }
     
         public long Id { get; set; }
@@ -25,6 +25,6 @@ namespace TestTaskInfocom
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<Equipment> Equipment { get; set; }
+        public virtual ICollection<Equipment> Equipment { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace TestTaskInfocom
     /// </summary>
     public partial class WinEquipments : Window
     {
-        TestTaskInfocomEntities context = new TestTaskInfocomEntities();
+        TestTaskEntities context = new TestTaskEntities();
         private CollectionViewSource equipmentViewSource;
 
 
@@ -64,6 +64,7 @@ namespace TestTaskInfocom
             context.Equipment.Remove(equipment);
             context.SaveChanges();
             equipmentViewSource.Source = context.Equipment.Local;
+            LoadPictures();
         }
 
 
@@ -87,8 +88,16 @@ namespace TestTaskInfocom
         private void LoadPictures()
         {
             var row = grEquipment.SelectedItem;
-            if (row == null) return;
-            if (!(grEquipment.SelectedItem is Equipment)) return;
+            if (row == null)
+            {
+                listFiles.ItemsSource = null;
+                return;
+            }
+            if (!(grEquipment.SelectedItem is Equipment))
+            {                
+                listFiles.ItemsSource = null;
+                return;
+            }
             var equipment = (Equipment)grEquipment.SelectedItem;
             if (equipment == null) return;
             foreach (var item in equipment.File)

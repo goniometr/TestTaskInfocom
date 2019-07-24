@@ -13,10 +13,10 @@ namespace TestTaskInfocom
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TestTaskInfocomEntities : DbContext
+    public partial class TestTaskEntities : DbContext
     {
-        public TestTaskInfocomEntities()
-            : base("name=TestTaskInfocomEntities")
+        public TestTaskEntities()
+            : base("name=TestTaskEntities")
         {
         }
     

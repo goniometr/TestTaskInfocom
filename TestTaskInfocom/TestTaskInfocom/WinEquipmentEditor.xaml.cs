@@ -22,7 +22,7 @@ namespace TestTaskInfocom
     {
         Equipment equipment;
         bool edit;
-        TestTaskInfocomEntities context;
+        TestTaskEntities context;
         List<EquipmentType> equipmentType = new List<EquipmentType>();
         List<ValueImage> listImage = new List<ValueImage>();
 
@@ -32,7 +32,7 @@ namespace TestTaskInfocom
         }
 
         //Конструктор вызывается при редактировании Кабинета
-        public WinEquipmentEditor(Equipment _equipment, TestTaskInfocomEntities _context)
+        public WinEquipmentEditor(Equipment _equipment, TestTaskEntities _context)
         {
             edit = true;
             equipment = _equipment;
@@ -56,7 +56,7 @@ namespace TestTaskInfocom
 
 
         //Вызывается при добавлении кабинета
-        public WinEquipmentEditor(TestTaskInfocomEntities _context)
+        public WinEquipmentEditor(TestTaskEntities _context)
         {
             edit = false;
             context = _context;
@@ -90,13 +90,14 @@ namespace TestTaskInfocom
 
 
         private void CreateEquipment()
-        {
-            equipment = context.Equipment.Create();
-            equipment.Description = descriptionTextBox.Text;
-            equipment.InventoryNumber = inventoryNumberTextBox.Text;
-            equipment.Name = nameTextBox.Text;
-            equipment.Room = (Room)cbxRoom.SelectedItem;
-            equipment.EquipmentType = (EquipmentType)cbxEquipmentType.SelectedItem;
+        {                        
+                if (equipment != null) return;
+                equipment = context.Equipment.Create();
+                equipment.Description = descriptionTextBox.Text;
+                equipment.InventoryNumber = inventoryNumberTextBox.Text;
+                equipment.Name = nameTextBox.Text;
+                equipment.Room = (Room)cbxRoom.SelectedItem;
+                equipment.EquipmentType = (EquipmentType)cbxEquipmentType.SelectedItem;                                    
         }
 
 
@@ -104,9 +105,12 @@ namespace TestTaskInfocom
         {
             try
             {
-                CreateEquipment();
-                context.Equipment.Add(equipment);
-                context.SaveChanges();
+                if (equipment == null)
+                {
+                    CreateEquipment();
+                    context.Equipment.Add(equipment);
+                    context.SaveChanges();
+                }
                 this.DialogResult = true;
                 this.Close();
             }

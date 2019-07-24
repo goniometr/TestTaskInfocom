@@ -10,14 +10,14 @@
 namespace TestTaskInfocom
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     
     public partial class Equipment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Equipment()
         {
-            this.File = new ObservableCollection<File>();
+            this.File = new HashSet<File>();
         }
     
         public long Id { get; set; }
@@ -30,6 +30,6 @@ namespace TestTaskInfocom
         public virtual EquipmentType EquipmentType { get; set; }
         public virtual Room Room { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<File> File { get; set; }
+        public virtual ICollection<File> File { get; set; }
     }
 }

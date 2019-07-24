@@ -21,7 +21,7 @@ namespace TestTaskInfocom
     {
         EquipmentType equipmentType;
         bool edit;
-        TestTaskInfocomEntities context;
+        TestTaskEntities context;
         public WinEquipmentTypeEditor()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace TestTaskInfocom
         }
 
         //Вызывается при добавлении кабинета
-        public WinEquipmentTypeEditor(TestTaskInfocomEntities _context)
+        public WinEquipmentTypeEditor(TestTaskEntities _context)
         {
             edit = false;
             context = _context;
