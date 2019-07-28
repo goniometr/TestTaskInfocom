@@ -45,6 +45,7 @@ namespace TestTaskInfocom
             fmRoom.ShowDialog();
             if (fmRoom.DialogResult == true)
             {
+                this.DialogResult = true;
                 var entity = context.Room.Find(room.Id);
                 if (entity == null) return;
                 entity.Floor = room.Floor;
@@ -62,6 +63,7 @@ namespace TestTaskInfocom
             context.Room.Remove(room);
             context.SaveChanges();
             roomViewSource.Source = context.Room.Local;
+            this.DialogResult = true;
         }
 
 
@@ -70,7 +72,8 @@ namespace TestTaskInfocom
             var fmRoom = new WinRoomEditor(context);
             fmRoom.ShowDialog();
             if (fmRoom.DialogResult == true)
-            {               
+            {
+                this.DialogResult = true;
                 context.Room.Load();
                 roomViewSource.Source = context.Room.ToList();
             }

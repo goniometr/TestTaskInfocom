@@ -63,6 +63,7 @@ namespace TestTaskInfocom
 
         private void LoadTree()
         {
+            treeReport.Items.Clear();
             var node = new TreeViewItem();
             node.Header = "Отчет наличия техники в кабинетах";
             node.IsExpanded = true;

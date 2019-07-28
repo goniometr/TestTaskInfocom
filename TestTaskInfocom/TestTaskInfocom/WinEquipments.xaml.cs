@@ -38,6 +38,7 @@ namespace TestTaskInfocom
             System.Windows.Data.CollectionViewSource fileViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("fileViewSource")));
         }
 
+      
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
@@ -46,6 +47,7 @@ namespace TestTaskInfocom
             fmEquipment.ShowDialog();
             if (fmEquipment.DialogResult == true)
             {
+                this.DialogResult = true;
                 var entity = context.Equipment.Find(equipment.Id);
                 if (entity == null) return;
                 entity.Name = equipment.Name;
@@ -55,11 +57,11 @@ namespace TestTaskInfocom
                 equipmentViewSource.Source = context.Equipment.ToList();
                 LoadPictures();
             }
-
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             var equipment = (Equipment)grEquipment.SelectedItem;
             context.Equipment.Remove(equipment);
             context.SaveChanges();
@@ -70,6 +72,7 @@ namespace TestTaskInfocom
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             var fmEquipment = new WinEquipmentEditor(context);
             fmEquipment.ShowDialog();
             if (fmEquipment.DialogResult == true)
@@ -109,5 +112,7 @@ namespace TestTaskInfocom
 
             listFiles.ItemsSource = list;
         }
+
+        
     }
 }
