@@ -36,6 +36,7 @@ namespace TestTaskInfocom
             context.Equipment.Load();
             equipmentViewSource.Source = context.Equipment.Local;
             System.Windows.Data.CollectionViewSource fileViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("fileViewSource")));
+            LoadDataForFilter();
         }
 
       
@@ -113,6 +114,28 @@ namespace TestTaskInfocom
             listFiles.ItemsSource = list;
         }
 
-        
+        private void LoadDataForFilter()
+        {
+            cbxRoom.ItemsSource = context.Room.ToList();
+            cbx_TypeEquipment.ItemsSource = context.EquipmentType.ToList();
+        }
+
+        private void BtnFilter_Click(object sender, RoutedEventArgs e)
+        {
+            var equipmentTypeId = ((EquipmentType)cbx_TypeEquipment.SelectedItem)?.Id ?? 0;
+            var roomId = ((Room)cbxRoom.SelectedItem)?.Id ?? 0;
+
+            if (equipmentTypeId == 0 && roomId == 0) return;
+
+            equipmentViewSource.Source = context.Equipment.Where(x =>            
+            (x.RoomId == roomId || roomId == 0) &&
+            (x.EquipmentTypeId == equipmentTypeId || equipmentTypeId == 0)).ToList();
+
+        }
+
+        private void BtnAll_Click(object sender, RoutedEventArgs e)
+        {
+            equipmentViewSource.Source = context.Equipment.ToList();
+        }
     }
 }

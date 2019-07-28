@@ -26,6 +26,26 @@
             <Button Click="Remove_Click" ToolTip="Удалить">
                 <Image Source = "Images\remove.png"></Image>
             </Button>
+            <ComboBox x:Name="cbx_TypeEquipment" Width="120">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox x:Name="cbxRoom" Width="120">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button x:Name="btnFilter" Content="Фильтр" Width="74" Click = "BtnFilter_Click"/>
+            <Button x:Name="btnAll" Content="Все" Width="76" Click="BtnAll_Click"/>
         </WrapPanel>
         <DataGrid x:Name="grEquipment" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Width="Auto" Height="Auto" Grid.Row="1" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="GrEquipment_SelectionChanged">
             <DataGrid.Columns>
