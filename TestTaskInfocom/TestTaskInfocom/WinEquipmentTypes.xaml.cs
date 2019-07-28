@@ -44,7 +44,6 @@ namespace TestTaskInfocom
             fmEditor.ShowDialog();
             if (fmEditor.DialogResult == true)
             {
-                this.DialogResult = true;
                 var entity = context.Room.Find(equipmentType.Id);
                 if (entity == null) return;
                 entity.Name = equipmentType.Name;
@@ -61,7 +60,6 @@ namespace TestTaskInfocom
             context.EquipmentType.Remove(value);
             context.SaveChanges();
             equipmentTypeViewSource.Source = context.Room.Local;
-            this.DialogResult = true;
         }
 
 
@@ -71,7 +69,6 @@ namespace TestTaskInfocom
             fmEquipmentTypeEditor.ShowDialog();
             if (fmEquipmentTypeEditor.DialogResult == true)
             {
-                this.DialogResult = true;
                 context.EquipmentType.Load() ;
                 equipmentTypeViewSource.Source = context.EquipmentType.ToList();
             }

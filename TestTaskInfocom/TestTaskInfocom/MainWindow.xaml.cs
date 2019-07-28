@@ -31,21 +31,21 @@ namespace TestTaskInfocom
         {
             var winEquipments = new WinEquipments();
             winEquipments.ShowDialog();
-            if (winEquipments.DialogResult == true) LoadTree(); 
+            LoadTree(); 
         }
 
         private void MenuItemTypesEquipment_Click(object sender, RoutedEventArgs e)
         {
             var winEquipmentType = new WinEquipmentTypes();
             winEquipmentType.ShowDialog();
-            if (winEquipmentType.DialogResult == true) LoadTree();
+            LoadTree();
         }
 
         private void MenuItemRooms_Click(object sender, RoutedEventArgs e)
         {
             var winRooms = new winRooms();
             winRooms.ShowDialog();
-            if (winRooms.DialogResult == true) LoadTree();
+            LoadTree();
 
         }
 
