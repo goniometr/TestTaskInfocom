@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestTaskInfocom"
         mc:Ignorable="d"
-        Title="Учет оборудования" Height="Auto" Width="Auto" Background="LightCyan" Loaded="Window_Loaded">
+        Title="Учет оборудования" Height="Auto" Width="Auto" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="equipmentTypeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:EquipmentType}, CreateList=True}"/>
         <CollectionViewSource x:Key="equipmentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Equipment}, CreateList=True}"/>
@@ -19,5 +19,6 @@
                 <MenuItem Name="Rooms" Header="Кабинеты" Click="MenuItemRooms_Click"></MenuItem>
             </MenuItem>
         </Menu>
+        <TreeView x:Name="treeReport" HorizontalAlignment="Left" Height="Auto" Margin="0,20,0,0" VerticalAlignment="Top" Width="Auto" BorderThickness="0"/>
     </Grid>
 </Window>
